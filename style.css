@@ -1,0 +1,135 @@
+:root {
+  --bg: #0d1118;
+  --panel: rgba(7, 14, 24, 0.8);
+  --panel-bright: rgba(13, 21, 35, 0.85);
+  --cyan: #38e8ff;
+  --green: #4afc8b;
+  --text: #d9e2f3;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; overflow: hidden; }
+body {
+  background: radial-gradient(circle at top, #1a2535, #0d1118 50%);
+  color: var(--text);
+  font-family: Inter, Segoe UI, Roboto, sans-serif;
+}
+
+#gameCanvas { display: block; width: 100vw; height: 100vh; }
+#hud { position: fixed; inset: 0; pointer-events: none; }
+
+#crosshair {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  color: var(--cyan); text-shadow: 0 0 8px var(--cyan), 0 0 18px var(--cyan); font-weight: 800;
+}
+
+#bars {
+  position: absolute; left: 14px; top: 14px; width: 320px;
+  background: linear-gradient(180deg, var(--panel-bright), var(--panel));
+  border: 1px solid rgba(56, 232, 255, 0.34);
+  border-radius: 10px; padding: 10px;
+  box-shadow: 0 0 18px rgba(56, 232, 255, 0.16);
+}
+
+.bar-wrap {
+  display: grid; grid-template-columns: 34px 1fr; gap: 8px;
+  align-items: center; margin: 6px 0; font-size: 12px;
+}
+
+.bar {
+  height: 12px; border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden;
+}
+
+.fill { height: 100%; transition: width 120ms linear; }
+.health { background: linear-gradient(90deg, #f24666, #ff8795); }
+.energy { background: linear-gradient(90deg, #00d2ff, #7bedff); }
+#levelText, #creditsText { color: #cce6ff; font-size: 12px; }
+
+#objectivePanel {
+  position: absolute; right: 14px; top: 14px; width: min(380px, 42vw);
+  background: linear-gradient(180deg, var(--panel-bright), var(--panel));
+  border: 1px solid rgba(56, 232, 255, 0.26);
+  border-radius: 10px; padding: 10px 12px;
+  box-shadow: 0 0 16px rgba(56, 232, 255, 0.12);
+  font-size: 13px;
+}
+
+#objectivePanel .title {
+  color: var(--cyan); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; margin-bottom: 6px;
+}
+
+#hotbar {
+  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+  display: flex; gap: 6px;
+}
+
+.slot {
+  width: 68px; height: 68px; background: var(--panel);
+  border: 1px solid rgba(130, 172, 190, 0.45); border-radius: 8px;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 6px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); color: #d3deea; font-size: 10px;
+}
+
+.slot.selected {
+  border-color: var(--cyan);
+  box-shadow: 0 0 12px rgba(56, 232, 255, 0.55), inset 0 0 0 1px rgba(56,232,255,0.35);
+}
+.slot .count { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+
+#hint {
+  position: absolute; right: 14px; bottom: 14px;
+  background: var(--panel); border-radius: 8px; border: 1px solid rgba(56, 232, 255, 0.25);
+  padding: 8px 10px; font-size: 12px;
+}
+
+#notification {
+  position: absolute; left: 50%; top: 16%; transform: translateX(-50%);
+  background: rgba(11, 21, 35, 0.88);
+  border: 1px solid rgba(74, 252, 139, 0.6);
+  color: #8bffb2; border-radius: 999px;
+  padding: 7px 14px; font-size: 13px; opacity: 0;
+  transition: opacity 200ms;
+}
+#notification.show { opacity: 1; }
+
+#terminal {
+  position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(820px, 94vw); height: min(460px, 78vh);
+  background: rgba(3, 11, 8, 0.96);
+  border: 1px solid #2cd86e;
+  box-shadow: 0 0 30px rgba(44, 216, 110, 0.28), inset 0 0 40px rgba(74, 252, 139, 0.06);
+  border-radius: 10px;
+  display: grid; grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+  color: var(--green);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+}
+
+#terminalHeader {
+  padding: 10px; font-weight: 700;
+  border-bottom: 1px solid rgba(74, 252, 139, 0.28);
+  background: rgba(74, 252, 139, 0.07);
+}
+
+#terminalLog {
+  padding: 10px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+#terminalInputRow {
+  display: flex; gap: 8px; align-items: center;
+  padding: 10px; border-top: 1px solid rgba(74, 252, 139, 0.28);
+}
+
+#prompt { color: #8cffad; font-size: 12px; }
+
+#terminalInput {
+  flex: 1; background: transparent; border: none;
+  color: var(--green); outline: none; font: inherit;
+}
+
+.hidden { display: none !important; }
