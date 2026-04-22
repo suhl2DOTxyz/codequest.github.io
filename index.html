@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeQuest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+
+  <div id="hud">
+    <div id="bars">
+      <div class="bar-wrap"><span>HP</span><div class="bar"><div id="healthBar" class="fill health"></div></div></div>
+      <div class="bar-wrap"><span>EN</span><div class="bar"><div id="energyBar" class="fill energy"></div></div></div>
+    </div>
+    <div id="crosshair">+</div>
+    <div id="hotbar"></div>
+    <div id="hint">Click to lock mouse · WASD move · Space jump · LMB mine · RMB place · T terminal</div>
+  </div>
+
+  <div id="terminal" class="hidden">
+    <div id="terminalHeader">CODEQUEST TERMINAL</div>
+    <div id="terminalLog"></div>
+    <div id="terminalInputRow">
+      <span>&gt;</span>
+      <input id="terminalInput" type="text" autocomplete="off" spellcheck="false" />
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/three@0.161.0/build/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
